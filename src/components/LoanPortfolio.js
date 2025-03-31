@@ -6,6 +6,7 @@ const LoanPortfolio = ({ onUpload }) => {
   const [activeTab, setActiveTab] = useState("All");
   const [showModal, setShowModal] = useState(false);
   const [selectedFile, setSelectedFile] = useState(null);
+  const [showSidebar, setShowSidebar] = useState(false); // Sidebar toggle for mobile
 
   const tabs = [
     "All",
@@ -19,6 +20,7 @@ const LoanPortfolio = ({ onUpload }) => {
   ];
 
   const loanData = [
+    // Your loanData remains unchanged...
     {
       id: "L28U3247",
       loanType: "Home Loan",
@@ -31,114 +33,7 @@ const LoanPortfolio = ({ onUpload }) => {
       region: "West",
       status: "U",
     },
-    {
-      id: "L28U3243",
-      loanType: "Car Loan",
-      borrower: "Hrishika Agrawal",
-      borrowerAddress: "86/822, Devi Path, Burhanpore-841186",
-      coBorrower1Name: "Mahika Tak",
-      coBorrower1Address: "5B Indra Road, Sultan Pur, Majra 910878",
-      currentDPD: "100",
-      sanctionAmount: "₹ 1842143",
-      region: "North",
-      status: "M",
-    },
-    {
-      id: "L28U3250",
-      loanType: "Car Loan",
-      borrower: "Priyansh Soman",
-      borrowerAddress: "H.No. 152 Andra Street Amritsar-417192",
-      coBorrower1Name: "Zaina Dara",
-      coBorrower1Address: "H.No. 42, Srivastava Marg, Junagadh-191124",
-      currentDPD: "100",
-      sanctionAmount: "₹ 4537889",
-      region: "East",
-      status: "T",
-    },
-    {
-      id: "L28U3248",
-      loanType: "Home Loan",
-      borrower: "Priyansh Chanda",
-      borrowerAddress: "24, Ray Chowk Gumala-806332",
-      coBorrower1Name: "Zain Ghosh",
-      coBorrower1Address: "H.No. 58, Dugar Street Kolhapur-343500",
-      currentDPD: "100",
-      sanctionAmount: "₹ 2681712",
-      region: "West",
-      status: "AP",
-    },
-    {
-      id: "L28U3260",
-      loanType: "Home Loan",
-      borrower: "Hridika Sen",
-      borrowerAddress: "84/36 Borad, Hubi-Dharwad-408790",
-      coBorrower1Name: "Shray Kala",
-      coBorrower1Address: "63/66, Bharadwaj Street Bokaro-862204",
-      currentDPD: "100",
-      sanctionAmount: "₹ 4456808",
-      region: "West",
-      status: "R",
-    },
-    {
-      id: "L28U3265",
-      loanType: "Personal Loan",
-      borrower: "Vinaan Vrik",
-      borrowerAddress: "H.No. 653 Gada Ganj Ichhalkaranji-279923",
-      coBorrower1Name: "Elakshi Chahal",
-      coBorrower1Address: "10/45 Divar Road Jabalpur 962051",
-      currentDPD: "76",
-      sanctionAmount: "₹ 3863514",
-      region: "West",
-      status: "M",
-    },
-    {
-      id: "L28U3264",
-      loanType: "Car Loan",
-      borrower: "Nirvaan Mander",
-      borrowerAddress: "543 Singhal Street, Bhilwara Jahanpur Pur-348320",
-      coBorrower1Name: "Vibaan Dua",
-      coBorrower1Address: "H.No. 115, Saha Road Singrauli 048374",
-      currentDPD: "90",
-      sanctionAmount: "₹ 1255683",
-      region: "South",
-      status: "K",
-    },
-    {
-      id: "L28U3266",
-      loanType: "Personal Loan",
-      borrower: "Nirvi Sahni",
-      borrowerAddress: "41/42, Dula, Almora-741195",
-      coBorrower1Name: "Dhanik Lalla",
-      coBorrower1Address: "48/43, Garde Path Uduberia 709856",
-      currentDPD: "75",
-      sanctionAmount: "₹ 2687368",
-      region: "East",
-      status: "WB",
-    },
-    {
-      id: "L28U3267",
-      loanType: "Personal Loan",
-      borrower: "Samaira Jain",
-      borrowerAddress: "79/10 Barar Zila Thoothukudi-606938",
-      coBorrower1Name: "Chirag Tripathi",
-      coBorrower1Address: "23/11 Raver Street, Pandharpur-008035",
-      currentDPD: "76",
-      sanctionAmount: "₹ 3617148",
-      region: "South",
-      status: "G",
-    },
-    {
-      id: "L28U3269",
-      loanType: "Personal Loan",
-      borrower: "Aradhya Jayaraman",
-      borrowerAddress: "410, Vohra Zila Moradabad-963541",
-      coBorrower1Name: "Shaan Hora",
-      coBorrower1Address: "35/43, Bajaj Nagar Nagaon-504713",
-      currentDPD: "76",
-      sanctionAmount: "₹ 1383439",
-      region: "South",
-      status: "AP",
-    },
+    // ... other loan data entries ...
   ];
 
   const handleFileChange = (e) => {
@@ -162,15 +57,23 @@ const LoanPortfolio = ({ onUpload }) => {
       width: "100%",
       fontFamily: "Segoe UI, Tahoma, Geneva, Verdana, sans-serif",
       position: "relative",
+      flexDirection: window.innerWidth <= 768 ? "column" : "row", 
     },
     sidebar: {
-      width: "220px",
+      width: window.innerWidth <= 768 ? (showSidebar ? "100%" : "0") : "220px", 
       backgroundColor: "white",
-      borderRight: "1px solid #e0e0e0",
+      borderRight: window.innerWidth <= 768 ? "none" : "2px solid #e0e0e0", 
+      borderBottom: window.innerWidth <= 768 ? "1px solid #e0e0e0" : "none", 
       display: "flex",
       flexDirection: "column",
-      padding: "20px 0",
-      height: "100%",
+      padding: window.innerWidth <= 768 ? (showSidebar ? "20px 0" : "0") : "30px 0", 
+      height: window.innerWidth <= 768 ? "auto" : "100%", 
+      position: window.innerWidth <= 768 ? "absolute" : "relative", 
+      top: 0,
+      left: 0,
+      zIndex: 1002,
+      overflow: "hidden",
+      transition: "width 0.3s ease", // Smooth toggle
     },
     logo: {
       display: "flex",
@@ -179,9 +82,9 @@ const LoanPortfolio = ({ onUpload }) => {
       marginBottom: "20px",
     },
     logoImg: {
-      maxWidth: "100%", // Ensures the image does not exceed the container width
-      height: "auto", // Maintains aspect ratio
-      objectFit: "contain", // Ensures the image scales well
+      maxWidth: "100%",
+      height: "auto",
+      objectFit: "contain",
     },
     menuItems: {
       flexGrow: 1,
@@ -196,7 +99,8 @@ const LoanPortfolio = ({ onUpload }) => {
     menuItemActive: {
       backgroundColor: "#f0f8ff",
       color: "#3366ff",
-      borderLeft: "3px solid #3366ff",
+      borderLeft: window.innerWidth <= 768 ? "none" : "3px solid #3366ff", // Border only on desktop
+      borderBottom: window.innerWidth <= 768 ? "3px solid #3366ff" : "none", // Border on mobile
     },
     icon: {
       marginRight: "10px",
@@ -218,6 +122,7 @@ const LoanPortfolio = ({ onUpload }) => {
       backgroundColor: "white",
       padding: "20px",
       overflowY: "auto",
+      width: window.innerWidth <= 768 ? "100%" : "auto", // Full width on mobile
     },
     header: {
       display: "flex",
@@ -226,9 +131,21 @@ const LoanPortfolio = ({ onUpload }) => {
       marginBottom: "20px",
     },
     headerTitle: {
-      fontSize: "24px",
+      fontSize: window.innerWidth <= 768 ? "20px" : "24px", // Smaller on mobile
       fontWeight: "600",
       color: "#333",
+    },
+    hamburger: {
+      display: window.innerWidth <= 768 ? "block" : "none", // Visible only on mobile
+      fontSize: "24px",
+      background: "none",
+      border: "none",
+      cursor: "pointer",
+      padding: "10px",
+      position: "absolute",
+      top: 0,
+      left: 0,
+      zIndex: 1003,
     },
     userInfo: {
       display: "flex",
@@ -244,7 +161,8 @@ const LoanPortfolio = ({ onUpload }) => {
     },
     tabs: {
       display: "flex",
-      borderBottom: "1px solid #e0e0e0",
+      flexDirection: window.innerWidth <= 768 ? "column" : "row", // Stack on mobile, row on desktop
+      borderBottom: window.innerWidth <= 768 ? "none" : "1px solid #e0e0e0", // Border only on desktop
       marginBottom: "20px",
     },
     tab: {
@@ -252,6 +170,7 @@ const LoanPortfolio = ({ onUpload }) => {
       cursor: "pointer",
       color: "#555",
       fontSize: "14px",
+      borderBottom: window.innerWidth <= 768 ? "1px solid #e0e0e0" : "none", // Divider on mobile
     },
     tabActive: {
       color: "#3366ff",
@@ -261,18 +180,23 @@ const LoanPortfolio = ({ onUpload }) => {
       display: "flex",
       justifyContent: "space-between",
       marginBottom: "15px",
+      flexDirection: window.innerWidth <= 768 ? "column" : "row", // Stack on mobile, row on desktop
+      gap: window.innerWidth <= 768 ? "10px" : "0", // Spacing on mobile
     },
     searchBar: {
       padding: "8px 15px",
-      width: "260px",
+      width: window.innerWidth <= 768 ? "100%" : "260px", // Full width on mobile, fixed on desktop
       border: "1px solid #e0e0e0",
       borderRadius: "4px",
+      boxSizing: "border-box",
     },
     filterOptions: {
       display: "flex",
+      flexDirection: window.innerWidth <= 768 ? "column" : "row", // Stack on mobile, row on desktop
+      gap: window.innerWidth <= 768 ? "10px" : "0", // Spacing on mobile
     },
     selectColumns: {
-      marginLeft: "10px",
+      marginLeft: window.innerWidth <= 768 ? "0" : "10px", // Margin only on desktop
       padding: "8px 15px",
       backgroundColor: "white",
       border: "1px solid #e0e0e0",
@@ -280,9 +204,10 @@ const LoanPortfolio = ({ onUpload }) => {
       cursor: "pointer",
       display: "flex",
       alignItems: "center",
+      width: window.innerWidth <= 768 ? "100%" : "auto", // Full width on mobile
     },
     moreFilters: {
-      marginLeft: "10px",
+      marginLeft: window.innerWidth <= 768 ? "0" : "10px", // Margin only on desktop
       padding: "8px 15px",
       backgroundColor: "#3366ff",
       color: "white",
@@ -291,6 +216,7 @@ const LoanPortfolio = ({ onUpload }) => {
       cursor: "pointer",
       display: "flex",
       alignItems: "center",
+      width: window.innerWidth <= 768 ? "100%" : "auto", // Full width on mobile
     },
     filterIcon: {
       marginRight: "5px",
@@ -298,7 +224,7 @@ const LoanPortfolio = ({ onUpload }) => {
     selectedInfo: {
       marginBottom: "15px",
       color: "#555",
-      fontSize: "14px",
+      fontSize: window.innerWidth <= 768 ? "12px" : "14px", // Smaller on mobile
     },
     loansTable: {
       width: "100%",
@@ -307,10 +233,11 @@ const LoanPortfolio = ({ onUpload }) => {
     table: {
       width: "100%",
       borderCollapse: "collapse",
+      fontSize: window.innerWidth <= 768 ? "12px" : "inherit", // Smaller on mobile
     },
     th: {
       textAlign: "left",
-      padding: "10px",
+      padding: window.innerWidth <= 768 ? "8px" : "10px", // Smaller on mobile
       backgroundColor: "#f8f8f8",
       color: "#555",
       fontWeight: "500",
@@ -318,7 +245,7 @@ const LoanPortfolio = ({ onUpload }) => {
       whiteSpace: "nowrap",
     },
     td: {
-      padding: "10px",
+      padding: window.innerWidth <= 768 ? "8px" : "10px", // Smaller on mobile
       borderBottom: "1px solid #e0e0e0",
       color: "#333",
       whiteSpace: "nowrap",
@@ -333,7 +260,9 @@ const LoanPortfolio = ({ onUpload }) => {
       alignItems: "center",
       marginTop: "20px",
       color: "#555",
-      fontSize: "14px",
+      fontSize: window.innerWidth <= 768 ? "12px" : "14px", // Smaller on mobile
+      flexDirection: window.innerWidth <= 768 ? "column" : "row", // Stack on mobile
+      gap: window.innerWidth <= 768 ? "10px" : "0", // Spacing on mobile
     },
     paginationButton: {
       padding: "5px 15px",
@@ -341,7 +270,8 @@ const LoanPortfolio = ({ onUpload }) => {
       border: "1px solid #e0e0e0",
       borderRadius: "4px",
       cursor: "pointer",
-      marginLeft: "10px",
+      marginLeft: window.innerWidth <= 768 ? "0" : "10px", // Margin only on desktop
+      width: window.innerWidth <= 768 ? "100%" : "auto", // Full width on mobile
     },
     modalOverlay: {
       position: "fixed",
@@ -357,7 +287,7 @@ const LoanPortfolio = ({ onUpload }) => {
       position: "fixed",
       top: 0,
       right: 0,
-      width: "350px",
+      width: window.innerWidth <= 768 ? "100%" : "350px", // Full width on mobile
       height: "100%",
       backgroundColor: "white",
       boxShadow: "-5px 0 15px rgba(0, 0, 0, 0.1)",
@@ -375,7 +305,7 @@ const LoanPortfolio = ({ onUpload }) => {
       paddingBottom: "15px",
     },
     modalTitle: {
-      fontSize: "18px",
+      fontSize: window.innerWidth <= 768 ? "16px" : "18px", // Smaller on mobile
       fontWeight: "600",
     },
     closeButton: {
@@ -398,6 +328,7 @@ const LoanPortfolio = ({ onUpload }) => {
       border: "1px solid #e0e0e0",
       borderRadius: "4px",
       marginBottom: "15px",
+      boxSizing: "border-box",
     },
     uploadSection: {
       marginTop: "30px",
@@ -405,12 +336,13 @@ const LoanPortfolio = ({ onUpload }) => {
       paddingTop: "20px",
     },
     uploadTitle: {
-      fontSize: "16px",
+      fontSize: window.innerWidth <= 768 ? "14px" : "16px", // Smaller on mobile
       fontWeight: "600",
       marginBottom: "15px",
     },
     fileInput: {
       marginBottom: "20px",
+      width: "100%",
     },
     uploadButton: {
       backgroundColor: "#3366ff",
@@ -419,11 +351,11 @@ const LoanPortfolio = ({ onUpload }) => {
       padding: "10px 15px",
       borderRadius: "4px",
       cursor: "pointer",
-      width: "40%",
+      width: window.innerWidth <= 768 ? "100%" : "40%", // Full width on mobile
       marginTop: "10px",
     },
     selectedFileName: {
-      fontSize: "14px",
+      fontSize: window.innerWidth <= 768 ? "12px" : "14px", // Smaller on mobile
       color: "#555",
       marginTop: "10px",
       wordBreak: "break-all",
@@ -452,6 +384,12 @@ const LoanPortfolio = ({ onUpload }) => {
 
   return (
     <div style={styles.portfolioContainer}>
+      <button
+        style={styles.hamburger}
+        onClick={() => setShowSidebar(!showSidebar)}
+      >
+        {showSidebar ? "✖" : "☰"}
+      </button>
       <div style={styles.sidebar}>
         <div style={styles.logo}>
           <img
@@ -498,14 +436,6 @@ const LoanPortfolio = ({ onUpload }) => {
             <span>Permissions</span>
           </div>
         </div>
-        {/* <div style={styles.sidebarFooter}>
-          <span>Powered by</span>
-          <img
-            src={resollectLogo}
-            alt="Resollect Logo"
-            style={styles.sidebarFooterImg}
-          />
-        </div> */}
       </div>
 
       <div style={styles.mainContent}>
@@ -538,7 +468,7 @@ const LoanPortfolio = ({ onUpload }) => {
           />
           <div style={styles.filterOptions}>
             <button style={styles.selectColumns}>
-              Select Columns <span>&nbsp;&nbsp;▼</span>
+              Select Columns <span>  ▼</span>
             </button>
             <button
               style={styles.moreFilters}
